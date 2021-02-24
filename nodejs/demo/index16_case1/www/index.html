@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./components/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+  <h1>index页面</h1>
+  <button class="btn btn-danger" id="sendGet">发送get请求</button>
+  <button class="btn btn-danger" id="sendPost">发送post请求</button>
+  <button class="btn btn-danger" id="sendGetOrPost">发送get/post请求</button>
+  <button class="btn btn-danger" id="sendD">发送get请求，路由传参</button>
+  <div id="content"></div>
+</body>
+</html>
+<script src="components/jquery/dist/jquery.js"></script>
+<script>
+  // 路由传参
+  sendD.onclick = function(){
+    $.ajax({
+      url:'/e/100',
+      type:'get',
+      success:function(data){
+        $("#content").append(JSON.stringify(data)+"<br/>");
+      }
+
+    })
+  }
+  // 1、get/post请求
+  sendGetOrPost.onclick=function(){
+    $.ajax({
+      url:'/c',
+      type:'post',
+      data:{tyzyp:new Date().toLocaleString()},
+      success:function(data){
+        console.log(data);
+        $("#content").append(data);
+      }
+    })
+  };
+  // 2、post请求 body传参
+  sendPost.onclick=function(){
+    $.ajax({
+      url:'/b',
+      type:'post',
+      data:{tyzyp:new Date().toLocaleString()},
+      success:function(data){
+        console.log(data);
+        // $("#content").append(`姓名：${data.data.name};年龄：${data.data.age};时间：${data.data.time}<br>`);
+      }
+    })
+  };
+  // 3、get请求
+  sendGet.onclick=function(){
+    $.ajax({
+      url:'/a',
+      type:'get',
+      data:{time:new Date().toLocaleString()},
+      success:function(data){
+        $("#content").append(`姓名：${data.data.name};年龄：${data.data.age};时间：${data.data.time}<br>`);
+      }
+    })
+  };
+  // npm install bower -g  全局安装bower 客户端管理工具  npm是服务端管理工具
+  // null>.bowerrc  在当前目录创建一个.borerrc隐藏空文件
+  // {
+  //   irectory": "./components"  指定下载包存放的文件夹
+  // }
+  // bower install bootstrap jquery angular --save  客户端下载包
+  // 使用post请求body传参，需要下载插件 npm install body-parser --save   服务端包
+
+  // mongod --dbpath .  // mac启动mongoDB服务器
+</script>

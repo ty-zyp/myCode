@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>todo demo</title>
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <!-- <script src="node_modules/react/umd/react.development.js"></script>
+  <script src="node_modules/react-dom/umd/react-dom-server.browser.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> -->
+</head>
+
+<body>
+  <div id="app"></div>
+  <script type="text/babel">
+    class TodoList extends React.Component {
+      constructor(props) {
+        super(props);
+      }
+      state = {
+        val: "",
+        list: []
+      }
+      handler = () => {
+        if (!this.state.val) { alert('请输入内容，再添加！'); return; }
+        let list = this.state.list;
+        list.unshift(this.state.val);
+        this.setState({ list, val: '' });
+
+      }
+      handlerInput = (e) => {
+        this.setState({ val: e.target.value });
+      }
+      del(e,index) {
+        // return ()=>{
+          let list = this.state.list;
+          list.splice(index, 1);
+          this.setState({ list: list });
+        // }
+      }
+      render() {
+        const val = this.state.val;
+        const arr = this.state.list;
+        const listItem = [];
+        arr.map((item, index) => {
+          listItem.push(
+            <li key={index}>
+              {/**<div>注释一</div>*/}
+              <span
+                style={{ display: 'inline-block', width: '100px' }}
+              >{item}</span>
+              <span onClick={e=>this.del(e,index)} style={{ marginLeft: '15px', color: 'red', cursor: 'pointer' }}>删除</span>
+            </li>)
+        })
+        return <div>
+          <div>
+            <input type="text" 
+            value={val} //绑定到状态state里面，通过修改state的val值，可以修改input内容
+            onChange={this.handlerInput} />
+            <button onClick={this.handler}>添加</button>
+          </div>
+          <ul>
+            {listItem}
+          </ul>
+        </div>
+      }
+    }
+
+
+    ReactDOM.render(
+      <TodoList />, document.getElementById('app')
+    )
+  </script>
+</body>
+
+</html>

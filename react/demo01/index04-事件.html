@@ -1,0 +1,57 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>demo 1</title>
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <!-- <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom-server.browser.development.js"></script> -->
+</head>
+<style>
+  .red {
+    color: red;
+  }
+</style>
+
+<body>
+  <div id="app">
+    beijing
+  </div>
+  <script type="text/babel">
+
+    class Hello extends React.Component{
+      constructor(props){
+        super(props);
+        this.state={
+          name:'ty',
+          age:30
+        }
+        this.updateUser = this.updateUser.bind(this)
+      }
+      updateUser(){
+        console.log(this);
+        this.setState({
+          name:'zyp',
+          age:33
+        })
+      }
+      render(){
+        return <div>
+          <h1>Hello {this.state.name}</h1>
+          <p>年龄：{this.state.age}</p>
+          <p>擅长：JavaScript</p>
+          <button onClick={()=>{return this.updateUser()}}>更新数据</button>
+          <button onClick={this.updateUser}>更新数据</button>
+          </div>
+      }
+    };
+    ReactDOM.render(
+      <Hello/>,document.getElementById("app")
+    )
+  </script>
+</body>
+
+</html>

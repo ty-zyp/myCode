@@ -1,0 +1,19 @@
+{
+  "name": "node qianduan-shujuku",
+  "description": "node案例前端到数据库",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-ui-router": "^1.0.29",
+    "bootstrap": "boostrap#^4.6.0",
+    "jquery": "^3.5.1"
+  }
+}
